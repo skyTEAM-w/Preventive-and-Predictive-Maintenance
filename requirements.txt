@@ -1,0 +1,5 @@
+matplotlib~=3.5.2
+numpy~=1.21.5
+tftb~=0.1.4
+pyhht~=0.1.0
+scipy~=1.9.1
