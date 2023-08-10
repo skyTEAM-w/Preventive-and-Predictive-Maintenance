@@ -3,7 +3,7 @@ from pyhht import EMD
 from scipy import signal as scisignal
 import pandas as pd
 import numpy as np
-from tftb import processing
+import tftb
 import matplotlib.pyplot as plt
 
 
@@ -50,7 +50,7 @@ def hht_analysis(signal, time, size):
 
 def hht_picture(imfs, imfs_ht, time, size):
     n_component = imfs.shape[0]
-    fig, axes = plt.subplots(n_component, 3, figsize=(20, 30), sharex='col', sharey=False)
+    fig, axes = plt.subplots(n_component, 3, figsize=(20, 30), sharex='col', sharey=False, linewidth=2)
     for i in range(n_component):
         axes[i][0].plot(time, imfs[i])
         axes[i][0].set_title('imf{}'.format(i + 1))
@@ -61,16 +61,17 @@ def hht_picture(imfs, imfs_ht, time, size):
         axes[i][1].set_title('IMF{}---FFT'.format(i + 1))
 
         fs = size
-        instf, timestamps = tftb.processing.inst_freq(imfs_ht)
+        imfs_ht_temp = imfs_ht[i][:, np.newaxis]
+        instf, timestamps = tftb.processing.inst_freq(imfs_ht_temp)
         axes[i][2].plot(timestamps / fs, instf * fs)
         axes[i][2].set_ylabel('Frequency/Hz')
         axes[i][2].set_xlabel('Time/s')
-        axes[i][2].set_title('IMF{}---Frequency/s')
+        axes[i][2].set_title('IMF{}---Frequency/s'.format(i + 1))
         pass
     plt.tight_layout()
     plt.show()
     pass
 
-def feature_processing():
+def feature_processing(imfs_ht):
 
     pass
