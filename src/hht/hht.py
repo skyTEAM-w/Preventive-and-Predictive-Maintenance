@@ -7,7 +7,7 @@ import tftb
 import matplotlib.pyplot as plt
 
 
-def signal_window(signal, beta):
+def signal_window(signal, beta=float) -> np.ndarray:
     """
     信号加窗，抑制HHT边缘效应
     :param signal: 输入信号
@@ -23,7 +23,8 @@ def signal_window(signal, beta):
                 Similar to a Blackman
     :return: 加窗后信号
     """
-    return signal * np.kaiser(len(signal), beta)
+    signal_temp = scisignal.detrend(signal, type='linear')
+    return signal_temp * np.kaiser(len(signal_temp), beta)
     pass
 
 
@@ -72,6 +73,15 @@ def hht_picture(imfs, imfs_ht, time, size):
     plt.show()
     pass
 
-def feature_processing(imfs_ht):
 
+def feature_processing(imfs_ht=np.ndarray) -> np.ndarray:
+    n_component = imfs_ht.shape[0]
+    frequency_array = []
+    for i in range(n_component):
+        fs = 20480
+        imfs_ht_temp = imfs_ht[i][:, np.newaxis]
+        instf, timestamps = tftb.processing.inst_freq(imfs_ht_temp)
+        frequency_array.append(np.mean(instf * fs))
+        pass
+    return np.array(frequency_array)
     pass
