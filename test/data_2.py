@@ -1,6 +1,7 @@
 from src.data.data_loader import load_data
 from src.data.data_preprocessing import preprocessor
 from src.data.get_batch import get_batch
+from models.multipleLSTM import multipleLSTM
 import seaborn as sns
 import pandas as pd
 import numpy as np
@@ -9,23 +10,7 @@ import torch
 
 import torch.nn as nn
 
-
-class mutipleLSTM(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size, num_layers, dropout):
-        super(mutipleLSTM, self).__init__()
-
-        self.lstm = nn.LSTM(input_size=input_size, hidden_size=hidden_size, num_layers=num_layers, dropout=dropout)
-        self.linear = nn.Linear(in_features=hidden_size, out_features=output_size)
-
-    def forward(self, x):
-        lstm_output, _ = self.lstm(x)
-        output = self.linear(lstm_output)
-        return output
-
-    pass
-
-
-model = mutipleLSTM(input_size=4, output_size=4, num_layers=4, hidden_size=512, dropout=0.5)
+model = multipleLSTM(input_size=4, output_size=4, num_layers=4, hidden_size=512, dropout=0.5)
 if torch.cuda.is_available():
     model = model.cuda()
 model.load_state_dict(torch.load('../models/lstm.pth'))
