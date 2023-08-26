@@ -1,6 +1,8 @@
 import tftb.processing
+import scipy
 from pyhht import EMD
 from scipy import signal as scisignal
+from scipy.integrate import simps
 import pandas as pd
 import numpy as np
 import tftb
@@ -23,7 +25,7 @@ def signal_window(signal, beta=float) -> np.ndarray:
                 Similar to a Blackman
     :return: 加窗后信号
     """
-    signal_temp = scisignal.detrend(signal, type='linear')
+    signal_temp = scipy.signal.detrend(signal, type='linear')
     return signal_temp * np.kaiser(len(signal_temp), beta)
     pass
 
@@ -90,12 +92,17 @@ def feature_processing_inst_freq(imfs_ht=np.ndarray) -> np.ndarray:
 def feature_processing_energy(imfs=np.ndarray, imfs_ht=np.ndarray, fs=int, size=int) -> float:
     n_component = imfs.shape[0]
     imfs_ht = imfs_ht[:-1]
+    energy = 0.
 
     for i in range(imfs_ht.shape[0]):
-
+        analytic_signal = imfs_ht[i]
+        amp = np.abs(analytic_signal)
+        energy_temp = simps(amp ** 2, dx=1. / fs)
+        energy += energy_temp
         pass
-
+    return energy
     pass
+
 
 # import numpy as np
 # import matplotlib.pyplot as plt
