@@ -2,6 +2,8 @@ from src.data.data_loader import load_data
 from src.data.data_preprocessing import preprocessor
 from src.data.get_batch import get_batch
 from models.multipleLSTM import multipleLSTM
+from src.train.train_model import train
+from torch.utils.data import DataLoader, TensorDataset
 import seaborn as sns
 import pandas as pd
 import numpy as np
@@ -45,8 +47,30 @@ if __name__ == '__main__':
     test_x, test_y = get_batch(data_test[:-3], data_test[1:][:, 0:4 + 1], 4)
 
     test_x = torch.Tensor(test_x)
+    test_y = torch.Tensor(test_y)
     test_x = test_x.cuda()
+    test_y = test_y.cuda()
     test_x = test_x.float()
+    test_y = test_y.float()
+
+    batch_size = 128
+
+    data_set = TensorDataset(test_x, test_y)
+    dataloader = DataLoader(dataset=data_set, batch_size=batch_size, shuffle=True)
+    test_dataloader = DataLoader(dataset=data_set, batch_size=batch_size, shuffle=True)
+
+    model.train()
+    model_evl, t_h, te_h = train(model=model, dataloader=dataloader, test_dataloader=test_dataloader, epochs=100)
+    plt.figure(1)
+    plt.plot(t_h, label='train_loss')
+    plt.plot(te_h, label='test_loss')
+    plt.ylabel('loss')
+    plt.xlabel('train_time')
+    plt.legend()
+    plt.show()
+
+    test_y = test_y.cpu()
+    test_y = test_y.detach().numpy()
 
     y_out = model(test_x)
     y_out = y_out.cpu()
@@ -75,3 +99,5 @@ if __name__ == '__main__':
         plt.legend()
     plt.tight_layout()
     plt.show()
+
+    torch.save(model.state_dict(), './lstm.pth')
