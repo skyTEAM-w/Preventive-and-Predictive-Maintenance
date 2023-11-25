@@ -100,4 +100,4 @@ if __name__ == '__main__':
     plt.tight_layout()
     plt.show()
 
-    torch.save(model.state_dict(), './lstm.pth')
+    torch.save(model.state_dict(), './lstm2.pth')

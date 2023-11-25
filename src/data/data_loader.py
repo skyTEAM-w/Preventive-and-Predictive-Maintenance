@@ -78,3 +78,15 @@ def load_data_cuda(data_dir=str, data_col=list):
         pass
 
     return energy_data
+
+
+def load_data_energy(data_path, data_col):
+    """
+    加载数据
+    :param data_path: 数据文件夹路径
+    :param data_col: 数据列名
+    :return: 数据
+    """
+
+
+
