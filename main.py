@@ -11,21 +11,44 @@ file_path = 'data/java/'
 
 
 def classify(file_name=str):
+    """
+    对文件进行分类。
+
+    Args:
+        file_name (str): 文件名。
+
+    Returns:
+        object: 分类结果。
+    """
     signal = load_data(file_name)
     return classifier_model(signal, 'models/202311301551_96.pth')
-    pass
 
 
 def save_data(file_name, file_data):
-    print('Save data...')
+    """
+    保存文件数据。
+
+    Args:
+        file_name (str): 文件名。
+        file_data (str): 文件数据。
+    """
+    print('保存数据...')
     decoder_data = base64.b64decode(file_data)
     with open(file_path + file_name, 'wb') as file:
         file.write(decoder_data)
-    print('Data is saved in ' + file_path + file_name)
-    pass
+    print('数据已保存在 ' + file_path + file_name)
 
 
 def parse_filename(file_name):
+    """
+    解析文件名，提取日期、时间和 ID。
+
+    Args:
+        file_name (str): 文件名。
+
+    Returns:
+        tuple: 包含日期、时间和 ID 的元组。
+    """
     file_name = os.path.splitext(file_name)[0]
     parts = file_name.split('_')
     date_str, time_str, id_str = parts[:3]
@@ -35,7 +58,6 @@ def parse_filename(file_name):
     time = datetime.strptime(time_str, time_format).time()
 
     return date.strftime('%Y-%m-%d'), time.strftime('%H:%M:%S'), id_str
-    pass
 
 
 @app.route('/app', methods=['POST'])
