@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 import pandas as pd
-from CWRUdata import CWRUdata
+from src.CWRU.CWRUdata import CWRUdata
 
 
 def check_accuracy(model, loader, device, error_analysis=False):
@@ -48,7 +48,7 @@ def create_dataset(data_dir, train):
 def create_model(model_name, model_param):
     model = None
     if model_name == 'plain_cnn':
-        from CWRUCNN import CWRUCNN
+        from src.CWRU.CWRUCNN import CWRUCNN
         model = CWRUCNN(**model_param)
     else:
         raise NotImplementedError('model [%s] not implemented.' % model_name)

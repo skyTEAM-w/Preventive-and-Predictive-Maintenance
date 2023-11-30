@@ -2,7 +2,7 @@ from src.CWRU.config import Config
 from src.CWRU.CWRUdata import CWRUdata
 from src.CWRU.utils import create_dataset, create_model
 from torch.utils.data import DataLoader
-from utils import check_accuracy
+from src.CWRU.utils import check_accuracy
 import torch
 from tensorboardX import SummaryWriter
 import copy
@@ -117,5 +117,5 @@ writer.close()
 # %%
 # save model in results dir
 model_save_path = 'results\\' + time.strftime('%Y%m%d%H%M_') + str(int(100 * best_acc)) + '.pth'
-torch.save(model.state_dict(), model_save_path)
+torch.save(model.module.state_dict(), model_save_path)
 print('best model is saved in: ', model_save_path)
