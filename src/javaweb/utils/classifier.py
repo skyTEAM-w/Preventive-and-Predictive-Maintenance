@@ -23,7 +23,10 @@ def classifier_model(signal_array=np.ndarray, model_dir=str):
     model = create_model(opt.model, opt.model_param)
 
     # 加载模型权重
-    model.load_state_dict(torch.load(model_dir))
+    if torch.cuda.is_available():
+        model.load_state_dict(torch.load(model_dir))
+    else:
+        model.load_state_dict(torch.load(model_dir, map_location=torch.device('cpu')))
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     model.to(device)
 
