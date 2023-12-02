@@ -71,7 +71,8 @@ def load_data_cuda(data_dir=str, data_col=list):
 
             imfs = imfs.cpu().numpy()
 
-            row_data.append(feature_processing_energy(imfs=imfs, imfs_ht=imfs, fs=data_set.shape[0], size=data_set.shape[0]))
+            row_data.append(
+                feature_processing_energy(imfs=imfs, imfs_ht=imfs, fs=data_set.shape[0], size=data_set.shape[0]))
             pass
 
         data_row = pd.DataFrame(np.array(row_data).reshape(1, data_set.shape[1]))

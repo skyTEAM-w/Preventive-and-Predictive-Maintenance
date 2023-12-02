@@ -102,7 +102,6 @@ def feature_processing_energy(imfs=np.ndarray, imfs_ht=np.ndarray, fs=int, size=
     return energy
     pass
 
-
 # import numpy as np
 # import matplotlib.pyplot as plt
 # from scipy.signal import hilbert

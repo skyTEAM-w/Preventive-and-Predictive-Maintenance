@@ -33,6 +33,7 @@ def picture(x, y, N):
     plt.title('合成信号频谱')
     plt.show()
 
+
 def HHT_Analysis(t, signal, N):
     decomposer = EMD(signal)
     imfs = decomposer.decompose()
@@ -41,7 +42,7 @@ def HHT_Analysis(t, signal, N):
 
     for i in range(n_components):
         axes[i][0].plot(t, imfs[i])
-        axes[i][0].set_title('imf{}'.format(i+1))
+        axes[i][0].set_title('imf{}'.format(i + 1))
 
         yf = np.fft.fft(imfs[i])
         xf = np.linspace(0.0, N / 2, N // 2)
@@ -52,6 +53,7 @@ def HHT_Analysis(t, signal, N):
 
     return imfs
     pass
+
 
 def HHTPicture(t, imfs, N, n):
     '''
@@ -77,11 +79,12 @@ def HHTPicture(t, imfs, N, n):
         instf, timestamps = tftb.processing.inst_freq(imfsHT)
         # 绘制瞬时频率，这里乘以fs是正则化频率到真实频率的转换
         fs = N
-        axes[iter][1].plot(timestamps/fs, instf * fs)
+        axes[iter][1].plot(timestamps / fs, instf * fs)
         axes[iter][1].set_xlabel('时间/s')
         axes[iter][1].set_ylabel('频率/Hz')
         # 计算瞬时频率的均值和中位数
-        axes[iter][1].set_title('Freq_Mean{:.2f}----Freq_Median{:.2f}'.format(np.mean(instf * fs), np.median(instf * fs)))
+        axes[iter][1].set_title(
+            'Freq_Mean{:.2f}----Freq_Median{:.2f}'.format(np.mean(instf * fs), np.median(instf * fs)))
 
 
 def HHTFilter(signal, componentsRetain):
