@@ -1,8 +1,8 @@
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
 import torch.utils
-import numpy as np
 
 
 def train(model=nn.Module, dataloader=torch.utils.data.DataLoader, test_dataloader=None, epochs=int):

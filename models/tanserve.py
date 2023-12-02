@@ -1,4 +1,5 @@
 import torch
+
 from src.CWRU.CWRUCNN import CWRUCNN
 
 model = CWRUCNN(54, 54, 55, 27, 16, 16)

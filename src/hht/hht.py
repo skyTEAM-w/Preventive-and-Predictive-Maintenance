@@ -1,12 +1,11 @@
-import tftb.processing
+import matplotlib.pyplot as plt
+import numpy as np
 import scipy
+import tftb
+import tftb.processing
 from pyhht import EMD
 from scipy import signal as scisignal
 from scipy.integrate import simps
-import pandas as pd
-import numpy as np
-import tftb
-import matplotlib.pyplot as plt
 
 
 def signal_window(signal, beta=float) -> np.ndarray:

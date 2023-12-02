@@ -1,14 +1,14 @@
-from src.CWRU.config import Config
-from src.CWRU.CWRUdata import CWRUdata
-from src.CWRU.utils import create_dataset, create_model
-from torch.utils.data import DataLoader
-from src.CWRU.utils import check_accuracy
-import torch
-from tensorboardX import SummaryWriter
 import copy
 import time
+
 import pandas as pd
-from torchsummary import summary
+import torch
+from tensorboardX import SummaryWriter
+from torch.utils.data import DataLoader
+
+from src.CWRU.config import Config
+from src.CWRU.utils import check_accuracy
+from src.CWRU.utils import create_dataset, create_model
 
 # %%
 opt = Config()

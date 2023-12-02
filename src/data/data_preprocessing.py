@@ -1,7 +1,7 @@
-import pandas as pd
 import numpy as np
-from sklearn.preprocessing import FunctionTransformer, MinMaxScaler
+import pandas as pd
 from sklearn.decomposition import PCA
+from sklearn.preprocessing import FunctionTransformer, MinMaxScaler
 
 
 class preprocessor:

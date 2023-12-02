@@ -1,13 +1,12 @@
+import os
+
 import h5py
 import numpy as np
-import os
-import sys
 import pandas as pd
 import scipy.io as scio
 import torch
-import matplotlib.pyplot as plt
+
 from src.torchHHT import hht
-from src.hht.hht import signal_window
 
 # %%
 data_dir = '../../data/input/CWRU/raw_data/'

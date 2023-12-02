@@ -1,5 +1,6 @@
-import torch
 import matplotlib.pyplot as plt
+import torch
+
 
 def plot_IMFs(x, imfs, fs, index = None, align_yticks = True, time_scale = 1, time_range = None, save_fig = None, title = None):
     '''

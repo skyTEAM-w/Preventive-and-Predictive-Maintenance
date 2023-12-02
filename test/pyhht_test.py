@@ -1,9 +1,9 @@
 import matplotlib
-from pyhht import EMD
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy.signal import hilbert
 import tftb.processing
+from pyhht import EMD
+from scipy.signal import hilbert
 
 matplotlib.rcParams['font.sans-serif'] = ['SimHei']  # 显示中文
 matplotlib.rcParams['axes.unicode_minus'] = False  # 显示负号

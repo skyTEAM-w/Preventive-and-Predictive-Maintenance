@@ -1,6 +1,5 @@
-import torch, math
-from .interpolation1d import _Interpolate
-from matplotlib import pyplot as plt
+import math
+import torch
 
 
 # -------- Hilbert-transform for demodulation ---------------

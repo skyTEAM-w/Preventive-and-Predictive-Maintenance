@@ -1,7 +1,5 @@
-import torch.utils.data as data
-
 import h5py
-import numpy as np
+import torch.utils.data as data
 
 
 class CWRUdata(data.Dataset):

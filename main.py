@@ -1,9 +1,11 @@
+import base64
 import os.path
 from datetime import datetime
+
 from flask import Flask, request, jsonify
-import base64
-from src.javaweb.utils.data_preprocess import load_data
+
 from src.javaweb.utils.classifier import classifier_model
+from src.javaweb.utils.data_preprocess import load_data
 
 app = Flask(__name__)
 

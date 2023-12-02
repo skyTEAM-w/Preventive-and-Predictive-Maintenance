@@ -1,6 +1,7 @@
 import numpy as np
-import torch
 import pandas as pd
+import torch
+
 from src.CWRU.CWRUdata import CWRUdata
 
 

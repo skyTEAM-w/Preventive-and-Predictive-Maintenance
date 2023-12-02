@@ -1,4 +1,5 @@
-import torch, math
+import torch
+
 from .frequency import get_envelope_frequency
 from .interpolation1d import _Interpolate
 
