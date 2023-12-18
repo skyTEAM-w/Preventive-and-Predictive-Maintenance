@@ -4,6 +4,7 @@ import torch
 import torch.utils.data
 from matplotlib import pyplot as plt
 from torch.utils.data import Dataset, DataLoader
+import pickle
 
 seed = 2023
 
@@ -211,6 +212,9 @@ def get_scaleing(data, scaler, scaler_range, train):
     scaled_df = scaled_df.dropna(axis=1)
     cols_wo_na = scaled_df.columns
     print("\n\t scaled_df after dropNA {} \n column names {}".format(scaled_df.shape, cols_wo_na))
+    print("\n\t scaler params {}".format(scalingparams))
+    with open('scaler_params.pkl', 'wb') as file:
+        pickle.dump(scalingparams, file)
 
     return scaled_df, cols_wo_na
 
@@ -366,6 +370,7 @@ class finaltest_dataset(Dataset):
                                          test=False, finaltest=True)
 
         # TestData Feature Scaling
+        print(self.scaler)
         scaled_df, cols_wo_na = get_scaleing(final_testing_set, self.scaler, self.scaler_range, train=False)
         final_testing_set[cols_wo_na] = scaled_df
         print('\n\t Shape of scaled final_test data ', final_testing_set.shape)

@@ -1,3 +1,4 @@
+import joblib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -5,7 +6,7 @@ from mpl_toolkits.mplot3d import Axes3D
 from sklearn.cluster import KMeans
 
 
-def cluster(read_path, sub_dataset):
+def cluster(read_path, sub_dataset, save_model=False, model_filename='kmeans_model.joblib'):
     print("Initiating Clustering for FD{}".format(sub_dataset))
     # Read Files
     train_data = pd.read_csv(read_path + "train_FD" + sub_dataset + ".csv")
@@ -41,6 +42,11 @@ def cluster(read_path, sub_dataset):
     test_data["operating_condition"] = test_data_labels
 
     print("Complete Clustering for FD{} and added a column named operating_condition".format(sub_dataset))
+
+    if save_model:
+        # Save the KMeans model to a file
+        joblib.dump(estimator, model_filename)
+        print(f"KMeans model saved to {model_filename}")
 
     return train_data, test_data
 

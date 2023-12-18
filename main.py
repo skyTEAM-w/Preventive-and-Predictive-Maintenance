@@ -1,15 +1,18 @@
 import base64
 import os.path
+import pymysql
 from datetime import datetime
 
 from flask import Flask, request, jsonify
 
 from src.javaweb.utils.classifier import classifier_model
 from src.javaweb.utils.data_preprocess import load_data
+from src.javaweb.utils.predict import *
 
 app = Flask(__name__)
 
 file_path = 'data/java/'
+models_dir = 'models/'
 
 
 def classify(file_name=str):
@@ -24,6 +27,13 @@ def classify(file_name=str):
     """
     signal = load_data(file_name)
     return classifier_model(signal, 'models/202311301551_96.pth')
+
+
+def predict(file_name=str):
+    sensors_data = load_data_rul(file_path + file_name,
+                                 models_dir + 'kmeans_model.joblib',
+                                 models_dir + 'scaler_params.pkl')
+    return predict_rul(sensors_data, models_dir + '202312181709_001.pth')
 
 
 def save_data(file_name, file_data):
@@ -87,3 +97,4 @@ def application_serve():
 if __name__ == '__main__':
     # classify('received_file.txt')
     app.run(host='127.0.0.1', port=11200)
+    # print(predict('rul_test.csv'))
