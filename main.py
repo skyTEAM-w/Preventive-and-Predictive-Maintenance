@@ -75,18 +75,24 @@ def parse_filename(file_name):
 @app.route('/app', methods=['POST'])
 def application_serve():
     try:
+        result = None
         input_data = request.get_json()
+        print(input_data)
         file_data = input_data['file_data']
         file_name = input_data['file_name']
+        method = input_data['file_type']
         save_data(file_name, file_data)
-        classify_result = classify(file_name)
-        print(type(classify_result))
+        if method == 'classify':
+            result = classify(file_name)
+        elif method == 'predict':
+            result = predict(file_name)
+        # print(type(classify_result))
         date, time, id = parse_filename(file_name)
         result_data = {
             'id': id,
             'date': date,
             'time': time,
-            'result-id': str(classify_result)
+            'result-id': str(result)
         }
         print(result_data)
         return jsonify(result_data)

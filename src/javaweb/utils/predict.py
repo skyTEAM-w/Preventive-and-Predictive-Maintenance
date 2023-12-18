@@ -14,6 +14,10 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 def load_data_rul(file_path, kmeans_path, scaler_path):
     data = pd.read_csv(file_path, index_col=0)
+    data.columns = ['id', 'cycle', 'setting1', 'setting2', 'setting3', 's1', 's2', 's3', 's4', 's5',
+              's6', 's7', 's8', 's9', 's10', 's11', 's12', 's13', 's14', 's15', 's16', 's17',
+              's18', 's19', 's20', 's21']
+    data = data.sort_values(by='cycle')
     # print(data)
     data = cluster(kmeans_path, data)
     # print(data)
